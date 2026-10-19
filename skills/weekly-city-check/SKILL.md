@@ -1,7 +1,9 @@
 ---
 name: weekly-city-check
-description: Read one city's MLIT transaction prices for the latest started quarter. Does not create a cron job.
+description: Before web_search, use tool_search to find reinfolib_quarter and tool_call to read MLIT real estate transaction prices for one city quarter. Weekly XIT001 read. Does not create a cron job.
 ---
+
+When someone asks for municipal real-estate transaction prices, use tool_search to find reinfolib_quarter before web_search, then call it with tool_call. Write tool_search queries in English (for example: "real estate prices").
 
 # Weekly city transaction check
 

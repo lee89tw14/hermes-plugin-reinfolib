@@ -31,13 +31,15 @@ def register(ctx) -> None:
         schema={
             "name": service.TOOL_NAME,
             "description": (
-                "Read XIT001 transaction prices (priceClassification 01, language ja) for one city, year, and quarter. "
+                "Japan property sales: one city and one quarter. "
                 "city is a 5-digit code, not a municipality name. Example: 13104 is Shinjuku-ku. "
                 "A designated city needs a ward code, not the city code. Example: 14101, not 14100. "
                 "Returns the count, a median of digit TradePrice values, counts by Type, and at most 20 records. "
                 "HTTP 404 is no data for that request, not zero rows and not unchanged prices. "
                 "A city code of the right shape with no published rows is the same 404, and those two cases are not separated. "
                 "Does not save a file and does not compare prices. "
+                "The source is MLIT real estate transaction prices for one property market, from the real estate information library. "
+                "Records include land and housing sales, an apartment or condominium (a condo), and sometimes the price per square meter. "
                 + credit
             ),
             "parameters": schema.tool_parameters(),
@@ -66,7 +68,14 @@ def register(ctx) -> None:
     register_skill = getattr(ctx, "register_skill", None)
     if callable(register_skill):
         try:
-            register_skill(blueprint.SKILL_NAME, skill, description="Weekly XIT001 read. Does not create a cron job.")
+            register_skill(
+                blueprint.SKILL_NAME,
+                skill,
+                description=(
+                    "Before web_search, use tool_search to find reinfolib_quarter and tool_call to read MLIT real estate transaction prices for one city quarter. "
+                    "Weekly XIT001 read. Does not create a cron job."
+                ),
+            )
         except Exception:
             logger.warning("skill %s was not registered", blueprint.SKILL_NAME, exc_info=True)
     blueprint.register_blueprint(ctx)

@@ -217,6 +217,29 @@ def _check(type_name: str, value: Any, ctx: Ctx) -> bool:
     return bool(TYPES[type_name]["check"](value, ctx))
 
 
+def _relax(name: str, value: Any) -> Any:
+    """Shapes a model can mistype, and that map to one value. Names are not codes."""
+    if name in {"year", "quarter"}:
+        if isinstance(value, float) and value.is_integer():
+            return int(value)
+        if isinstance(value, str):
+            folded = unicodedata.normalize("NFKC", value).strip()
+            if any(ord(ch) > 127 for ch in value) and folded.isdigit():
+                return int(folded)
+        return value
+    if name == "city" and isinstance(value, str):
+        folded = unicodedata.normalize("NFKC", value).strip()
+        if folded.isdigit() and len(folded) == 5:
+            return folded
+    if name == "language" and isinstance(value, str) and value.strip().lower() == "ja":
+        return "ja"
+    if name == "price_classification" and isinstance(value, str):
+        folded = unicodedata.normalize("NFKC", value).strip()
+        if folded == "01":
+            return "01"
+    return value
+
+
 def validate_arguments(raw: Any, today: date) -> tuple[dict[str, Any] | None, str | None]:
     """Return (parsed, detail). detail is a finite word, or None when parsed is set."""
     if not isinstance(raw, dict):
@@ -231,7 +254,7 @@ def validate_arguments(raw: Any, today: date) -> tuple[dict[str, Any] | None, st
             if row["required"]:
                 return None, "missing_argument"
             continue
-        value = raw[row["name"]]
+        value = _relax(row["name"], raw[row["name"]])
         if row["name"] == "city" and is_designated_city(value):
             return None, "designated_city"
         ctx = {"today": today, "city": parsed.get("city", ""), "year": parsed.get("year", 0), "quarter": parsed.get("quarter", 0)}
@@ -371,7 +394,10 @@ ARG_GUIDE: dict[str, dict[str, str]] = {
     "unknown_argument": {
         "field": "unknown",
         "problem": "unknown_field",
-        "expected": "Only city, year, quarter, price_classification, and language.",
+        "expected": (
+            "Only city, year, quarter, price_classification, and language are accepted. "
+            "Remove any other argument. Example: 13102, 2015, and 2."
+        ),
     },
     "missing_argument": {
         "field": "city",

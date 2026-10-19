@@ -94,7 +94,6 @@ def test_fixture_from_live_shape_redacts_place_and_price():
 def test_refuses_before_http():
     cases = [
         ({"city": "13102", "year": 2015, "quarter": 2, "area": "1"}, "unknown_argument"),
-        ({"city": "１３１０２", "year": 2015, "quarter": 2}, "bad_city"),
         ({"city": "13102", "year": True, "quarter": 2}, "bad_year"),
         ({"city": "13102", "year": 2005, "quarter": 1}, "bad_quarter"),
         ({"city": "13102", "year": 2026, "quarter": 2}, "future_quarter"),

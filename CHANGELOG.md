@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.1
+
+The first sentence Tool Search shows now uses the words a person would ask with. A sentence that starts by describing the mechanism is not found, and the model falls through to the built-in web_search.
+
+The `weekly-city-check` skill's description now tells the model to find `reinfolib_quarter` with tool_search before web_search. Tests check that the skill stays in the model's skill list when Tool Search is left at its default.
+
+A year or quarter written as 10.0 or fullwidth digits, a fullwidth city code, a fullwidth price class `01`, and language in any letter case are accepted. The refusal of an unknown argument now says to remove it and gives an example (13102, 2015, and 2). A municipality name was already refused as not a code.
+
 ## 0.1.0
 
 Read-only access to MLIT transaction prices (XIT001, price class `01`, language `ja`) through one tool, `reinfolib_quarter`.
