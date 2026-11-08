@@ -1,0 +1,1064 @@
+{
+  "schema_version": 1,
+  "basis": "Official API manual as of 2026-11-08; per-tile contracts in tile-contracts.json.",
+  "endpoint_count": 36,
+  "endpoints": [
+    {
+      "id": "XIT001",
+      "title": "不動産価格（取引価格・成約価格）情報取得API",
+      "transport": "json",
+      "zoom": null,
+      "documented_parameters": [
+        "priceClassification",
+        "year",
+        "quarter",
+        "area",
+        "city",
+        "station",
+        "language"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xit001/",
+      "implementation_status": "implemented_v2_transactions_and_legacy",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "city_ja_quarter_01",
+        "city_en_quarter_01",
+        "city_quarter_02",
+        "city_annual_both_pre2021",
+        "city_quarter_both",
+        "station_quarter_both",
+        "area_quarter_01",
+        "station_400_fallback_required",
+        "station_404_not_found",
+        "area_annual_both_response_too_large"
+      ]
+    },
+    {
+      "id": "XIT002",
+      "title": "都道府県内市区町村一覧取得API",
+      "transport": "json",
+      "zoom": null,
+      "documented_parameters": [
+        "area",
+        "language"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xit002/",
+      "implementation_status": "implemented_v2_municipalities",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "area_13_ja",
+        "area_14_ja",
+        "area_27_ja",
+        "area_14_en"
+      ]
+    },
+    {
+      "id": "XCT001",
+      "title": "鑑定評価書情報API",
+      "transport": "json",
+      "zoom": null,
+      "documented_parameters": [
+        "year",
+        "area",
+        "division"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xct001/",
+      "implementation_status": "implemented_m4_appraisal_background",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_json"
+      ]
+    },
+    {
+      "id": "XPT001",
+      "title": "不動産価格（取引価格・成約価格）情報のポイント (点) API",
+      "transport": "tile",
+      "zoom": [
+        11,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y",
+        "from",
+        "to",
+        "priceClassification",
+        "landTypeCode"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xpt001/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": false,
+        "layer_kind": null,
+        "refusal": "xpt001_not_property_level"
+      }
+    },
+    {
+      "id": "XPT002",
+      "title": "地価公示・地価調査のポイント (点) API",
+      "transport": "tile",
+      "zoom": [
+        13,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y",
+        "year",
+        "priceClassification",
+        "useCategoryCode"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xpt002/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": false,
+        "layer_kind": null,
+        "refusal": "endpoint_requires_filters"
+      }
+    },
+    {
+      "id": "XKT001",
+      "title": "都市計画決定GISデータ（都市計画区域/区域区分）API",
+      "transport": "tile",
+      "zoom": [
+        11,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt001/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded",
+        "decoded_pbf_matches_geojson_same_tile"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "legal_designation",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT002",
+      "title": "都市計画決定GISデータ（用途地域）API",
+      "transport": "tile",
+      "zoom": [
+        11,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt002/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded",
+        "decoded_pbf_matches_geojson_same_tile",
+        "point_overlay_geojson"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "legal_designation",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT003",
+      "title": "都市計画決定GISデータ（立地適正化計画）API",
+      "transport": "tile",
+      "zoom": [
+        11,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt003/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "legal_designation",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT004",
+      "title": "国土数値情報（小学校区）API",
+      "transport": "tile",
+      "zoom": [
+        11,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y",
+        "administrativeAreaCode"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt004/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "administrative_reference_area",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT005",
+      "title": "国土数値情報（中学校区）API",
+      "transport": "tile",
+      "zoom": [
+        11,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y",
+        "administrativeAreaCode"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt005/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "administrative_reference_area",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT006",
+      "title": "国土数値情報（学校）API",
+      "transport": "tile",
+      "zoom": [
+        13,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt006/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded",
+        "decoded_pbf_matches_geojson_same_tile"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "facility_location",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT007",
+      "title": "国土数値情報（保育園・幼稚園等）API",
+      "transport": "tile",
+      "zoom": [
+        13,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt007/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "facility_location",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT010",
+      "title": "国土数値情報（医療機関）API",
+      "transport": "tile",
+      "zoom": [
+        13,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt010/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "facility_location",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT011",
+      "title": "国土数値情報（福祉施設）API",
+      "transport": "tile",
+      "zoom": [
+        13,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y",
+        "administrativeAreaCode",
+        "welfareFacilityClassCode",
+        "welfareFacilityMiddleClassCode",
+        "welfareFacilityMinorClassCode"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt011/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "facility_location",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT013",
+      "title": "国土数値情報（将来推計人口250mメッシュ）API",
+      "transport": "tile",
+      "zoom": [
+        11,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt013/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "statistical_area",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT014",
+      "title": "都市計画決定GISデータ（防火・準防火地域）API",
+      "transport": "tile",
+      "zoom": [
+        11,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt014/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded",
+        "point_overlay_geojson"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "legal_designation",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT015",
+      "title": "国土数値情報（駅別乗降客数）API",
+      "transport": "tile",
+      "zoom": [
+        11,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt015/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded",
+        "decoded_pbf_matches_geojson_same_tile"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "statistical_area",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT016",
+      "title": "国土数値情報（災害危険区域）API",
+      "transport": "tile",
+      "zoom": [
+        11,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y",
+        "administrativeAreaCode"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt016/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "legal_designation",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT017",
+      "title": "国土数値情報（図書館）API",
+      "transport": "tile",
+      "zoom": [
+        13,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y",
+        "administrativeAreaCode"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt017/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "facility_location",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT018",
+      "title": "国土数値情報（市区町村役場及び集会施設等）API",
+      "transport": "tile",
+      "zoom": [
+        13,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt018/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "facility_location",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT019",
+      "title": "国土数値情報（自然公園地域）API",
+      "transport": "tile",
+      "zoom": [
+        9,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y",
+        "prefectureCode",
+        "districtCode"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt019/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "legal_designation",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT020",
+      "title": "国土数値情報（大規模盛土造成地マップ）API",
+      "transport": "tile",
+      "zoom": [
+        11,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt020/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "land_condition_survey",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT021",
+      "title": "国土数値情報（地すべり防止地区）API",
+      "transport": "tile",
+      "zoom": [
+        11,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y",
+        "prefectureCode",
+        "administrativeAreaCode"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt021/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "legal_designation",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT022",
+      "title": "国土数値情報（急傾斜地崩壊危険区域）API",
+      "transport": "tile",
+      "zoom": [
+        11,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y",
+        "prefectureCode",
+        "administrativeAreaCode"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt022/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "legal_designation",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT023",
+      "title": "都市計画決定GISデータ（地区計画）API",
+      "transport": "tile",
+      "zoom": [
+        11,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt023/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "legal_designation",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT024",
+      "title": "都市計画決定GISデータ（高度利用地区）API",
+      "transport": "tile",
+      "zoom": [
+        11,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt024/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "legal_designation",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT025",
+      "title": "国土交通省都市局（地形区分に基づく液状化の発生傾向図）API",
+      "transport": "tile",
+      "zoom": [
+        11,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt025/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "physical_hazard_estimate",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT026",
+      "title": "国土数値情報（洪水浸水想定区域（想定最大規模））API",
+      "transport": "tile",
+      "zoom": [
+        14,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt026/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded",
+        "point_overlay_geojson"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "physical_hazard_estimate",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT027",
+      "title": "国土数値情報（高潮浸水想定区域）API",
+      "transport": "tile",
+      "zoom": [
+        13,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt027/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "physical_hazard_estimate",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT028",
+      "title": "国土数値情報（津波浸水想定）API",
+      "transport": "tile",
+      "zoom": [
+        14,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt028/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "physical_hazard_estimate",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT029",
+      "title": "国土数値情報（土砂災害警戒区域）API",
+      "transport": "tile",
+      "zoom": [
+        11,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt029/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded",
+        "point_overlay_geojson"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "legal_designation",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT030",
+      "title": "都市計画決定GISデータ（都市計画道路）API",
+      "transport": "tile",
+      "zoom": [
+        11,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt030/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "legal_designation",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XKT031",
+      "title": "国土数値情報（人口集中地区）API",
+      "transport": "tile",
+      "zoom": [
+        9,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y",
+        "administrativeAreaCode"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt031/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "statistical_area",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XGT001",
+      "title": "国土地理院GISデータ（指定緊急避難場所）API",
+      "transport": "tile",
+      "zoom": [
+        11,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xgt001/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "facility_location",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XST001",
+      "title": "国土調査（災害履歴）API",
+      "transport": "tile",
+      "zoom": [
+        9,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y",
+        "disastertype_code"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xst001/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "hazard_history_record",
+        "refusal": null
+      }
+    },
+    {
+      "id": "XNT001",
+      "title": "内閣府重要土地等調査法（特別注視区域）API",
+      "transport": "tile",
+      "zoom": [
+        11,
+        15
+      ],
+      "documented_parameters": [
+        "response_format",
+        "z",
+        "x",
+        "y"
+      ],
+      "source_url": "https://www.reinfolib.mlit.go.jp/help/apiManual/xnt001/",
+      "implementation_status": "implemented_m4_single_tile_raw",
+      "new_adapter_live_verified": true,
+      "live_verification_date": "2026-11-08",
+      "live_verification_scope": [
+        "positive_geojson",
+        "empty200_geojson",
+        "opaque_pbf_bytes_not_decoded"
+      ],
+      "m5_overlay": {
+        "eligible": true,
+        "layer_kind": "legal_designation",
+        "refusal": null
+      }
+    }
+  ]
+}

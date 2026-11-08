@@ -95,17 +95,17 @@ def test_blueprint_kwargs_have_no_toolset_or_mcp():
             return None
 
         def register_automation_blueprint(self, key, **kwargs):
-            seen["key"] = key
-            seen["kwargs"] = kwargs
+            seen[key] = kwargs
             return True
 
     module.register(Ctx())
-    blob = json.dumps(seen["kwargs"])
-    assert seen["key"] == "weekly-city-check"
-    assert "enabled_toolsets" not in seen["kwargs"]
-    assert "mcp" not in blob.lower()
-    assert "reinfolib_watch" not in blob
-    assert "reinfolib_quarter" in seen["kwargs"]["prompt_template"]
+    assert set(seen) == {"weekly-city-check", "weekly-history-check"}
+    for kwargs in seen.values():
+        blob = json.dumps(kwargs)
+        assert "enabled_toolsets" not in kwargs
+        assert "mcp" not in blob.lower()
+        assert "reinfolib_watch" not in blob
+    assert "reinfolib_quarter" in seen["weekly-city-check"]["prompt_template"]
 
 
 def test_query_is_only_the_five_fields():

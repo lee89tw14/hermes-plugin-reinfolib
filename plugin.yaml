@@ -1,21 +1,57 @@
 name: jp-reinfolib
-version: 0.1.1
+version: 0.2.0-dev.1
 manifest_version: 2
-requires_hermes: ">=0.21.4"
+requires_hermes: ">=0.23.0"
 description: >-
-  Quarterly MLIT prices for one city, via reinfolib_quarter.
+  MLIT property prices with raw snapshots, local paging, filtering and JSON/CSV export.
+  reinfolib_transactions and reinfolib_municipalities send the key only to the fixed official
+  HTTPS XIT001 and XIT002 APIs. reinfolib_stations is local (no key, no request): its packaged
+  index is 「国土数値情報（鉄道データ）」（国土交通省）N02-25
+  (https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N02-2025.html) を加工して作成, CC BY 4.0 compatible.
+  Also covers XCT001 appraisal background and all 33 documented tile APIs, including XPT002.
+  reinfolib_layer and reinfolib_land_values return complete single-response raw JSON
+  or base64 PBF; PBF stays opaque unless decode_pbf=true asks the stdlib decoder for a labelled,
+  simplified decoded view (never presented as the GeoJSON response). They do not persist
+  snapshots; only reinfolib_layer with save_artifact=true (PBF only) writes the exact raw PBF
+  bytes and a metadata file as a private export (raw Mapbox Vector Tile, not GeoJSON).
+  XPT001 is nearest-station geometry, never property-level hazard/school/radius evidence.
+  Source vintages and regional licensing differ; commercial usage fails closed pending
+  regional clearance. Attribution, processing and the mandated API credit are returned.
+  reinfolib_geocode and reinfolib_point_layers send the address text you give
+  (no key) to the 国土地理院 address search https://msearch.gsi.go.jp/address-search/AddressSearch;
+  出典：国土地理院ウェブサイト, processed by this plugin (国土地理院コンテンツ利用規約
+  https://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html). GSI says this search is meant
+  mainly for GSI Maps and may change or stop without notice (gsimaps FAQ #29); requests are
+  spaced 1 second apart in a separate profile gate. The coordinate is a geocoded address point,
+  not a parcel or building; matches coarser than block level and ambiguous matches are refused.
+  Overlay reports each layer separately from official GeoJSON tiles with an explicit tolerance;
+  no features, outside or 404 are never safe, it is not a legal determination, XPT001 is never
+  used.
+  No property-level conclusions from transaction data and no automatic scheduling.
+  It saves full raw snapshots under profile plugin-data; records/export can read all
+  snapshots in that profile, including from admitted gateway users. Export writes private
+  files with provenance. Do not expose a shared profile to users who must not share data.
+  Snapshots and exports (including saved PBF tiles) are deleted automatically 30 days after they are written; a
+  cleanup failure adds the warning retention_cleanup_failed and does not stop the call.
+  Early deletion is terminal only: hermes jp-reinfolib delete <snapshot|export> <uuid>
+  (--yes or an interactive y). It is not a tool or slash command and gateway chats cannot
+  call it. Anyone who can run shell commands on this host as this user, including an agent
+  with a terminal tool, can run it, so it is not a permission boundary.
+  The legacy reinfolib_quarter retains its original no-file contract and supports BASE_URL.
   Disclosure — sends your REINFOLIB_API_KEY as Ocp-Apim-Subscription-Key to
-  www.reinfolib.mlit.go.jp (HTTPS, XIT001) or the host of REINFOLIB_BASE_URL.
+  www.reinfolib.mlit.go.jp (HTTPS, XIT001/XIT002/XCT001 and allowlisted tile paths) or,
+  only for the legacy quarter tool, the host of REINFOLIB_BASE_URL.
   Plain http is refused except 127.0.0.1 and localhost, where the key is not encrypted.
   On for every surface, including gateways, so anyone you allow can call it with your key,
   with no approval prompt, including unattended cron, yolo, and approvals off.
   hermes tools does not stop /jp-reinfolib. Stop the slash command with allow_admin_from,
   user_allowed_commands, group_user_allowed_commands, or by disabling the plugin.
-  After a GET returns, this process waits 1 second before the next, each GET stops
-  after 30 seconds with no bytes, and there is no retry or daily cap.
+  Legacy quarter tool: after a GET returns, this process waits 1 second before the next, each GET
+  stops after 30 seconds with no bytes, and there is no retry or daily cap. The other tools share
+  a per-profile 1 second gate and retry 429/5xx/network errors up to 3 attempts.
   Blueprint jp-reinfolib:weekly-city-check is once a week (default Monday 09:00)
   and calls only this tool after you schedule it.
-  This plugin does not create a cron job or write a file. A job you schedule stays
+  This plugin does not create a cron job. Only the legacy quarter tool writes no files. A job you schedule stays
   until hermes cron remove and may include your MCP servers.
   HTTP 404 means no data for that request, not zero rows and not unchanged prices.
   A scheduled run is one model turn. A turn that calls the tool is at least two model requests.
@@ -29,6 +65,19 @@ homepage: https://github.com/TakeshiTGAL/hermes-plugin-reinfolib
 tags: [japan, mlit, real-estate]
 provides_tools:
   - reinfolib_quarter
+  - reinfolib_transactions
+  - reinfolib_records
+  - reinfolib_export
+  - reinfolib_catalog
+  - reinfolib_municipalities
+  - reinfolib_stations
+  - reinfolib_snapshots
+  - reinfolib_history
+  - reinfolib_diff
+  - reinfolib_land_values
+  - reinfolib_layer
+  - reinfolib_geocode
+  - reinfolib_point_layers
 requires_env:
   - name: REINFOLIB_API_KEY
     description: >-

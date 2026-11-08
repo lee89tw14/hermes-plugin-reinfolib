@@ -1,5 +1,26 @@
 # jp-reinfolib
 
+Hermes Agent plugin for the MLIT 不動産情報ライブラリ API (XIT001/XIT002 transactions, XCT001/XPT002 land values, 33 tile layers), with a 国土地理院 address-search geocoder. 14 tools, standard library only, MIT.
+
+Based on the original `jp-reinfolib` 0.1.1 by TakeshiTGAL (https://github.com/TakeshiTGAL/hermes-plugin-reinfolib); the legacy `reinfolib_quarter` tool, slash command and weekly blueprint are kept unchanged.
+
+- Tools and examples: `docs/USAGE.md`
+- Endpoint index used at runtime: `reinfolib/data/endpoint-inventory.json`
+- Changes: `CHANGELOG.md`
+
+Install from a Git source and pin a commit:
+
+```bash
+hermes plugins install <git-url-or-owner/repo> --ref <40-char commit sha> --enable
+hermes gateway restart
+```
+
+Tests: `python -m pytest -q`.
+
+## Legacy tool: `reinfolib_quarter`
+
+The rest of this page describes the original `reinfolib_quarter` tool. Statements below about a single tool, no saved files and `REINFOLIB_BASE_URL` apply to that tool only; see `docs/USAGE.md` for the others.
+
 Read one city's MLIT transaction prices for one year and one quarter. The tool is `reinfolib_quarter`. It calls XIT001 only (`priceClassification` `01`, language `ja`). It does not create a cron job, and it does not write a file.
 
 「このサービスは、国土交通省の不動産情報ライブラリのAPI機能を使用していますが、提供情報の最新性、正確性、完全性等が保証されたものではありません」
@@ -72,11 +93,7 @@ A scheduled run is one model turn. A turn that calls the tool is at least two mo
 
 ## Update
 
-```bash
-hermes plugins update jp-reinfolib
-```
-
-Run that in the `HERMES_HOME` you want to update.
+See `docs/USAGE.md` (Updating). Pinned installs are not changed by `hermes plugins update`.
 
 ## Key handling
 

@@ -1,0 +1,293 @@
+{
+  "redaction": "First real response row per query. All property-specific values blanked, only type/source/period/municipality kept. Counts describe original responses, not fixture rows.",
+  "source_url": "https://www.reinfolib.mlit.go.jp/",
+  "cases": [
+    {
+      "query": {
+        "price_classification": "01",
+        "language": "ja",
+        "city": "13102",
+        "year": 2015,
+        "quarter": 2
+      },
+      "fetched_at": "2026-11-08T04:20:44Z",
+      "source_upstream_count": 176,
+      "fixture_row_count": 1,
+      "body": {
+        "status": "OK",
+        "data": [
+          {
+            "PriceCategory": "不動産取引価格情報",
+            "Type": "中古マンション等",
+            "Region": "",
+            "MunicipalityCode": "13102",
+            "Prefecture": "東京都",
+            "Municipality": "中央区",
+            "DistrictName": "",
+            "TradePrice": "",
+            "PricePerUnit": "",
+            "FloorPlan": "",
+            "Area": "",
+            "UnitPrice": "",
+            "LandShape": "",
+            "Frontage": "",
+            "TotalFloorArea": "",
+            "BuildingYear": "",
+            "Structure": "",
+            "Use": "",
+            "Purpose": "",
+            "Direction": "",
+            "Classification": "",
+            "Breadth": "",
+            "CityPlanning": "",
+            "CoverageRatio": "",
+            "FloorAreaRatio": "",
+            "Period": "2015年第2四半期",
+            "Renovation": "",
+            "Remarks": "",
+            "DistrictCode": ""
+          }
+        ]
+      }
+    },
+    {
+      "query": {
+        "price_classification": "01",
+        "language": "en",
+        "city": "13102",
+        "year": 2015,
+        "quarter": 2
+      },
+      "fetched_at": "2026-11-08T04:20:45Z",
+      "source_upstream_count": 176,
+      "fixture_row_count": 1,
+      "body": {
+        "status": "OK",
+        "data": [
+          {
+            "PriceCategory": "Real Estate Transaction Price Information",
+            "Type": "Pre-owned Condominiums, etc.",
+            "Region": "",
+            "MunicipalityCode": "13102",
+            "Prefecture": "Tokyo",
+            "Municipality": "Chuo Ward",
+            "DistrictName": "",
+            "TradePrice": "",
+            "PricePerUnit": "",
+            "FloorPlan": "",
+            "Area": "",
+            "UnitPrice": "",
+            "LandShape": "",
+            "Frontage": "",
+            "TotalFloorArea": "",
+            "BuildingYear": "",
+            "Structure": "",
+            "Use": "",
+            "Purpose": "",
+            "Direction": "",
+            "Classification": "",
+            "Breadth": "",
+            "CityPlanning": "",
+            "CoverageRatio": "",
+            "FloorAreaRatio": "",
+            "Period": "2nd quarter 2015",
+            "Renovation": "",
+            "Remarks": "",
+            "DistrictCode": ""
+          }
+        ]
+      }
+    },
+    {
+      "query": {
+        "price_classification": "02",
+        "language": "ja",
+        "city": "13102",
+        "year": 2024,
+        "quarter": 1
+      },
+      "fetched_at": "2026-11-08T04:20:46Z",
+      "source_upstream_count": 303,
+      "fixture_row_count": 1,
+      "body": {
+        "status": "OK",
+        "data": [
+          {
+            "PriceCategory": "成約価格情報",
+            "Type": "中古マンション等",
+            "Region": "",
+            "MunicipalityCode": "13102",
+            "Prefecture": "東京都",
+            "Municipality": "中央区",
+            "DistrictName": "",
+            "TradePrice": "",
+            "PricePerUnit": "",
+            "FloorPlan": "",
+            "Area": "",
+            "UnitPrice": "",
+            "LandShape": "",
+            "Frontage": "",
+            "TotalFloorArea": "",
+            "BuildingYear": "",
+            "Structure": "",
+            "Use": "",
+            "Purpose": "",
+            "Direction": "",
+            "Classification": "",
+            "Breadth": "",
+            "CityPlanning": "",
+            "CoverageRatio": "",
+            "FloorAreaRatio": "",
+            "Period": "2024年第1四半期",
+            "Renovation": "",
+            "Remarks": "",
+            "DistrictCode": ""
+          }
+        ]
+      }
+    },
+    {
+      "query": {
+        "price_classification": "both",
+        "language": "ja",
+        "city": "13102",
+        "year": 2015
+      },
+      "fetched_at": "2026-11-08T04:20:48Z",
+      "source_upstream_count": 719,
+      "fixture_row_count": 1,
+      "body": {
+        "status": "OK",
+        "data": [
+          {
+            "PriceCategory": "不動産取引価格情報",
+            "Type": "宅地(土地と建物)",
+            "Region": "",
+            "MunicipalityCode": "13102",
+            "Prefecture": "東京都",
+            "Municipality": "中央区",
+            "DistrictName": "",
+            "TradePrice": "",
+            "PricePerUnit": "",
+            "FloorPlan": "",
+            "Area": "",
+            "UnitPrice": "",
+            "LandShape": "",
+            "Frontage": "",
+            "TotalFloorArea": "",
+            "BuildingYear": "",
+            "Structure": "",
+            "Use": "",
+            "Purpose": "",
+            "Direction": "",
+            "Classification": "",
+            "Breadth": "",
+            "CityPlanning": "",
+            "CoverageRatio": "",
+            "FloorAreaRatio": "",
+            "Period": "2015年第1四半期",
+            "Renovation": "",
+            "Remarks": "",
+            "DistrictCode": ""
+          }
+        ]
+      }
+    },
+    {
+      "query": {
+        "price_classification": "both",
+        "language": "ja",
+        "city": "13102",
+        "year": 2024,
+        "quarter": 1
+      },
+      "fetched_at": "2026-11-08T04:20:49Z",
+      "source_upstream_count": 486,
+      "fixture_row_count": 1,
+      "body": {
+        "status": "OK",
+        "data": [
+          {
+            "PriceCategory": "不動産取引価格情報",
+            "Type": "宅地(土地と建物)",
+            "Region": "",
+            "MunicipalityCode": "13102",
+            "Prefecture": "東京都",
+            "Municipality": "中央区",
+            "DistrictName": "",
+            "TradePrice": "",
+            "PricePerUnit": "",
+            "FloorPlan": "",
+            "Area": "",
+            "UnitPrice": "",
+            "LandShape": "",
+            "Frontage": "",
+            "TotalFloorArea": "",
+            "BuildingYear": "",
+            "Structure": "",
+            "Use": "",
+            "Purpose": "",
+            "Direction": "",
+            "Classification": "",
+            "Breadth": "",
+            "CityPlanning": "",
+            "CoverageRatio": "",
+            "FloorAreaRatio": "",
+            "Period": "2024年第1四半期",
+            "Renovation": "",
+            "Remarks": "",
+            "DistrictCode": ""
+          }
+        ]
+      }
+    },
+    {
+      "query": {
+        "price_classification": "both",
+        "language": "ja",
+        "station": "003696",
+        "year": 2024,
+        "quarter": 1
+      },
+      "fetched_at": "2026-11-08T04:20:50Z",
+      "source_upstream_count": 53,
+      "fixture_row_count": 1,
+      "body": {
+        "status": "OK",
+        "data": [
+          {
+            "PriceCategory": "不動産取引価格情報",
+            "Type": "中古マンション等",
+            "Region": "",
+            "MunicipalityCode": "13104",
+            "Prefecture": "東京都",
+            "Municipality": "新宿区",
+            "DistrictName": "",
+            "TradePrice": "",
+            "PricePerUnit": "",
+            "FloorPlan": "",
+            "Area": "",
+            "UnitPrice": "",
+            "LandShape": "",
+            "Frontage": "",
+            "TotalFloorArea": "",
+            "BuildingYear": "",
+            "Structure": "",
+            "Use": "",
+            "Purpose": "",
+            "Direction": "",
+            "Classification": "",
+            "Breadth": "",
+            "CityPlanning": "",
+            "CoverageRatio": "",
+            "FloorAreaRatio": "",
+            "Period": "2024年第1四半期",
+            "Renovation": "",
+            "Remarks": "",
+            "DistrictCode": ""
+          }
+        ]
+      }
+    }
+  ]
+}

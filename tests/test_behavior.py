@@ -278,8 +278,11 @@ def test_plugin_registers_only_the_read_tool_and_no_cron():
 
     ctx = Ctx()
     module.register(ctx)
-    assert [tool["name"] for tool in ctx.tools] == ["reinfolib_quarter"]
-    assert ctx.skills == ["weekly-city-check"]
+    assert [tool["name"] for tool in ctx.tools] == [
+        "reinfolib_transactions", "reinfolib_records", "reinfolib_export", "reinfolib_catalog",
+        "reinfolib_municipalities", "reinfolib_stations", "reinfolib_snapshots", "reinfolib_history", "reinfolib_diff", "reinfolib_layer", "reinfolib_land_values", "reinfolib_geocode", "reinfolib_point_layers", "reinfolib_quarter",
+    ]
+    assert ctx.skills == ["property-transactions", "weekly-city-check"]
     assert ctx.blueprints[0][0] == "weekly-city-check"
     prompt = ctx.blueprints[0][1]["prompt_template"]
     assert "reinfolib_quarter" in prompt and "reinfolib_watch" not in prompt

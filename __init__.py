@@ -20,6 +20,16 @@ def _load():
 
 
 def register(ctx) -> None:
+    v2_registered = False
+    try:
+        if __package__:
+            from .reinfolib.adapter import register as register_v2
+        else:
+            from reinfolib.adapter import register as register_v2
+        register_v2(ctx)
+        v2_registered = True
+    except Exception:
+        logger.warning('Optional v2 registration failed; legacy registrations remain available.')
     blueprint, schema, service, credit = _load()
 
     def _quarter(args, **_kwargs):
@@ -67,6 +77,18 @@ def register(ctx) -> None:
     skill = Path(__file__).resolve().parent / "skills" / blueprint.SKILL_NAME / "SKILL.md"
     register_skill = getattr(ctx, "register_skill", None)
     if callable(register_skill):
+        if v2_registered:
+            try:
+                register_skill(
+                    "property-transactions",
+                    Path(__file__).resolve().parent / "skills" / "property-transactions" / "SKILL.md",
+                    description=(
+                        "Before web_search, use tool_search to find reinfolib_transactions; "
+                        "query, page, filter and export Japan property sale records."
+                    ),
+                )
+            except Exception:
+                logger.warning("skill property-transactions was not registered")
         try:
             register_skill(
                 blueprint.SKILL_NAME,
@@ -79,6 +101,27 @@ def register(ctx) -> None:
         except Exception:
             logger.warning("skill %s was not registered", blueprint.SKILL_NAME, exc_info=True)
     blueprint.register_blueprint(ctx)
+    if v2_registered:
+        try:
+            if __package__:
+                from .reinfolib import blueprints as v2_blueprints
+            else:
+                from reinfolib import blueprints as v2_blueprints
+            v2_blueprints.register_blueprint(ctx)
+        except Exception:
+            logger.warning("history blueprint was not registered")
+
+    register_cli = getattr(ctx, "register_cli_command", None)
+    if callable(register_cli):
+        try:
+            if __package__:
+                from .reinfolib import cli_commands
+            else:
+                from reinfolib import cli_commands
+            register_cli(cli_commands.NAME, cli_commands.HELP, cli_commands.setup,
+                         handler_fn=cli_commands.handle, description=cli_commands.DESCRIPTION)
+        except Exception:
+            logger.warning("CLI maintenance command was not registered")
 
 
 __all__ = ["register"]

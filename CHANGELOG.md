@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.2.0-dev.1
+
+Adds a new core beside the legacy tool. `reinfolib_quarter`, `/jp-reinfolib` and the `weekly-city-check` blueprint are unchanged. Requires Hermes >= 0.23.0.
+
+Transactions
+- `reinfolib_transactions`: XIT001 by area, city or station; full year or one quarter; `01`, `02` or `both`; `ja` or `en`. Keeps every returned field, including unknown ones, in an immutable snapshot.
+- `reinfolib_records`, `reinfolib_export`, `reinfolib_snapshots`: local paging, exact and range filters, grouped Decimal statistics, JSON/CSV export with provenance and CSV formula escaping.
+- Station 400 returns `fallback_required`; responses over 8 MB return `response_too_large`. Neither falls back or truncates.
+
+Lookup
+- `reinfolib_municipalities`: XIT002 list with name candidates.
+- `reinfolib_stations`: packaged N02-25 station directory with a reproducible, hash-checked rebuild script.
+
+Monitoring
+- `reinfolib_history`: bounded backward probe for the newest published quarter, with site-notice lookup and a 6-hour 404 cache.
+- `reinfolib_diff`: snapshot comparison reported as API record changes.
+- New `weekly-history-check` blueprint. No cron job is created.
+
+Land and layers
+- `reinfolib_land_values`: XCT001 appraisal background and XPT002 land-price tiles.
+- `reinfolib_layer`: all 33 tile endpoints with per-endpoint validation, source vintage and licensing metadata. Optional `decode_pbf` (standard-library MVT decoder) and `save_artifact` (raw PBF to exports).
+- Commercial purpose is refused until regional terms are reviewed. XPT001 points are labelled nearest-station only.
+
+Geocoding
+- `reinfolib_geocode`: 国土地理院 address search, all candidates, no key.
+- `reinfolib_point_layers`: per-layer overlay at a block- or house-level point with explicit tolerance.
+
+Transport and storage
+- Per-profile cross-process rate gate (1 s spacing) and bounded retry for 429/5xx/network errors, with a total deadline.
+- Snapshot schema version checks with an in-memory migration registry.
+- Snapshots, exports and crash-left temporary files are deleted after 30 days. `hermes jp-reinfolib delete` removes one item early from a terminal.
+- JSON depth limit 32; fractional or exponent numbers in unknown fields are rejected instead of being rounded.
+
 ## 0.1.1
 
 The first sentence Tool Search shows now uses the words a person would ask with. A sentence that starts by describing the mechanism is not found, and the model falls through to the built-in web_search.
